@@ -1,7 +1,16 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 
 const App = () => {
-    return <h1>Test</h1>
-}
+  const databaseURL = 'https://fir-study-2ceb7-default-rtdb.firebaseio.com';
+  useEffect(() => {
+    axios
+      .post(`${databaseURL}/test.json`, {
+        test: '테스트',
+      })
+      .then((res) => console.log(res));
+  }, []);
 
-export default App; 
+  return <h1>테스트</h1>;
+};
+export default App;
