@@ -1,16 +1,23 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import LoginPage from '../pages/LoginPage';
+import MyPage from '../pages/MyPage';
+import SignUpPage from '../pages/SignUpPage';
+import NavBar from './NavBar';
 
 const App = () => {
-  const databaseURL = 'https://fir-study-2ceb7-default-rtdb.firebaseio.com';
-  useEffect(() => {
-    axios
-      .post(`${databaseURL}/test.json`, {
-        test: '테스트',
-      })
-      .then((res) => console.log(res));
-  }, []);
+  const [isLogged, setIsLogged] = useState(false);
 
-  return <h1>테스트</h1>;
+  return (
+    <div>
+      <BrowserRouter>
+        <NavBar isLogged={isLogged} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/signup" component={SignUpPage} />
+        <Route exact path="/mypage" component={MyPage} />
+      </BrowserRouter>
+    </div>
+  );
 };
+
 export default App;
